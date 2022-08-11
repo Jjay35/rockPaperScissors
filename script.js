@@ -19,9 +19,9 @@ if called 2 then return scissors
 
 function getComputerChoice(){
 let computerChoice = Math.floor(Math.random() * 3);
-let rock = "Rock",
-    paper = "Paper",
-    scissors = "Scissors";
+let rock = "rock",
+    paper = "paper",
+    scissors = "scissors";
 
     if(computerChoice == 0){
         return rock;
@@ -33,3 +33,71 @@ let rock = "Rock",
         return scissors;
     }
 }
+
+/*
+Play a round of rock-paper-scissors
+Player must input either rock, paper, scissors, case-insensitive
+Set conditions of the game
+*/
+
+function playRound(playerSelection, computerSelection){
+    const playerDecision = playerSelection.toLowerCase();
+
+    let winningMessage = "You win! " + playerDecision + " beats " + computerSelection;
+    let tieMessage = "You tied! "
+    let lostMessage = "You lost! " + computerSelection + " beats " + playerDecision;
+
+
+    if(playerDecision == "rock" && computerSelection == "rock"){
+        return tieMessage;
+    }
+    else if(playerDecision == "rock" && computerSelection == "paper"){
+        return lostMessage;
+    }
+    else if(playerDecision == "rock" && computerSelection == "scissors"){
+        return winningMessage;
+    }
+    else if(playerDecision == "paper" && computerSelection == "rock"){
+        return winningMessage;
+    }
+    else if(playerDecision == "paper" && computerSelection == "paper"){
+        return tieMessage;
+    }
+    else if(playerDecision == "paper" && computerSelection == "scissors"){
+        return lostMessage;
+    }
+    else if(playerDecision == "scissors" && computerSelection == "rock"){
+        return lostMessage;
+    }
+    else if(playerDecision == "scissors" && computerSelection == "paper"){
+        return winningMessage;
+    }
+    else if(playerDecision == "scissors" && computerSelection == "scissors"){
+        return tieMessage;
+    }
+        
+}
+
+
+/*
+ Runs the game in a best of 5 while keeping the score. 
+ Reports the winner or loser at the end
+*/
+function game(){
+
+    for(let i = 0; i < 5; i++){
+        let playerInput = prompt("Input rock, paper, or scissors");
+        let text = "Please try again";
+        if (playerInput == "rock" || playerInput == "paper" || playerInput == "scissors"){
+            console.log(playRound(playerInput, getComputerChoice()));
+        }
+        else{
+            return text;
+        }
+
+    }
+}
+
+game();
+
+
